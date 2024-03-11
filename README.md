@@ -17,5 +17,8 @@ Number must be between 1 and 2000 (assume inclusive), no decimals, no negatives.
 
 Trying a TDD approach - write a test, code for it, refactor
 Starting with breaking a number into decimal units...
+- Moved this to a common project and spent too long having fun with it!
 
-Moved this to a common project and spent too long having fun with it!
+Now have two contracts in the Roman Numeral interface, TDD approach again:
+    string ConvertRoundedUnitToRoman(int decimalUnit);
+    string ConvertIntegerToRoman(int integer);
