@@ -7,14 +7,20 @@ public class RomanNumeralService : IRomanNumeralService
 {
     public string ConvertIntegerToRoman(int integer)
     {
-        EnsureIntegerIsInRange(integer);
+        if (!EnsureInputStringIsValid(integer.ToString()))
+        {
+            throw new ArgumentException();
+        }
 
         return string.Join("", integer.ToDecimalUnitsArray().OrderByDescending(x => x).Select(ConvertRoundUnitToRoman));
     }
 
     public string ConvertRoundUnitToRoman(int roundedUnit)
     {
-        EnsureIntegerIsInRange(roundedUnit);
+        if (!EnsureInputStringIsValid(roundedUnit.ToString()))
+        {
+            throw new ArgumentException();
+        }
 
         if (!roundedUnit.HasOneSignificantFigure())
         {
@@ -40,11 +46,12 @@ public class RomanNumeralService : IRomanNumeralService
         // If this were to go higher this would probably best fit a collection of mappings to apply dynamically 
     }
 
-    private void EnsureIntegerIsInRange(int integer)
+    public bool EnsureInputStringIsValid(string? inputStr)
     {
-        if (integer < 1 || integer > 2000)
-        {
-            throw new ArgumentOutOfRangeException($"Only integers greater than 0 and up to 2000 are allowed in {nameof(ConvertIntegerToRoman)} - actual {integer}");
-        }
+        if (string.IsNullOrEmpty(inputStr)) return false;
+        if (!int.TryParse(inputStr, out int integer)) return false;
+        if (integer < 1 || integer > 2000) return false;
+
+        return true;
     }
 }

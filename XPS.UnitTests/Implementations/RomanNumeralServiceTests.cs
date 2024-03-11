@@ -35,7 +35,6 @@ public class RomanNumeralServiceTests
     [DataRow(900, "CM")]
     [DataRow(1000, "M")]
     [DataRow(2000, "MM")]
-    [DataRow(3000, "MMM")]
     public void ConvertRoundedUnitToRoman_WhenValidRoundedUnit_ThenExpectedRomanNumeralsReturned(int input, string expectedOutput)
     {
         var romanNumeralService = new RomanNumeralService();
@@ -62,14 +61,14 @@ public class RomanNumeralServiceTests
     [DataTestMethod]
     [DataRow(0)]
     [DataRow(-1)]
-    [DataRow(2000)]
+    [DataRow(2001)]
     public void ConvertRoundedUnitToRoman_WhenInvalidInteger_ThenExpectArgumentOutOfRangeExceptionThrown(int input)
     {
         var romanNumeralService = new RomanNumeralService();
 
         Action action = () => romanNumeralService.ConvertRoundUnitToRoman(input);
 
-        Assert.ThrowsException<ArgumentOutOfRangeException>(action);
+        Assert.ThrowsException<ArgumentException>(action);
     }
 
     [DataTestMethod]
@@ -124,6 +123,6 @@ public class RomanNumeralServiceTests
 
         Action action = () => romanNumeralService.ConvertIntegerToRoman(input);
 
-        Assert.ThrowsException<ArgumentOutOfRangeException>(action);
+        Assert.ThrowsException<ArgumentException>(action);
     }
 }
