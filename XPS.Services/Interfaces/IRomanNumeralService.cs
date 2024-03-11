@@ -2,6 +2,6 @@
 
 public interface IRomanNumeralService
 {
-    string ConvertRoundedUnitToRoman(int decimalUnit);
+    string ConvertRoundUnitToRoman(int decimalUnit);
     string ConvertIntegerToRoman(int integer);
 }

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\XPS.Common\XPS.Common.csproj" />
+  </ItemGroup>
+
 </Project>

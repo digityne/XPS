@@ -1,4 +1,6 @@
-﻿namespace XPS.Common.Extensions;
+﻿using System.Runtime.CompilerServices;
+
+namespace XPS.Common.Extensions;
 
 public static class IntExtensions
 {
@@ -22,5 +24,15 @@ public static class IntExtensions
         }
 
         return [.. result];
+    }
+
+    public static bool HasOneSignificantFigure(this int i)
+    {
+        while (i % 10 == 0)
+        {
+            i /= 10;
+        }
+
+        return i > 0 && i < 10;
     }
 }

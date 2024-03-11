@@ -1,3 +1,5 @@
+using XPS.Services.Implementations;
+
 namespace XPS.Services.UnitTests.Implementations;
 
 [TestClass]
@@ -34,8 +36,12 @@ public class RomanNumeralServiceTests
     [DataRow(1000, "M")]
     [DataRow(2000, "MM")]
     [DataRow(3000, "MMM")]
-    public void ConvertRoundedUnitToRoman_WhenValidRoundedUnit_ThenExpectedRomanNumeralsReturned()
+    public void ConvertRoundedUnitToRoman_WhenValidRoundedUnit_ThenExpectedRomanNumeralsReturned(int input, string expectedOutput)
     {
-        
+        var romanNumeralService = new RomanNumeralService();
+
+        var actualResult = romanNumeralService.ConvertRoundUnitToRoman(input);
+
+        Assert.AreEqual(expectedOutput, actualResult);
     }
 }

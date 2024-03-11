@@ -56,4 +56,40 @@ public class IntExtensionTests
 
         CollectionAssert.AreEquivalent(expectedResults, actual);
     }
+
+    [DataTestMethod]
+    [DataRow(1)]
+    [DataRow(2)]
+    [DataRow(10)]
+    [DataRow(90)]
+    [DataRow(100)]
+    [DataRow(900)]
+    [DataRow(1000)]
+    [DataRow(900000)]
+    public void HasOneSignificantFigure_WhenValidPositiveIntegerSupplied_ThenReturnsTrue(int i)
+    {
+        bool expectedResult = true;
+
+        var actual = i.HasOneSignificantFigure();
+
+        Assert.AreEqual(expectedResult, actual);
+    }
+
+    [DataTestMethod]
+    [DataRow(11)]
+    [DataRow(22)]
+    [DataRow(101)]
+    [DataRow(903)]
+    [DataRow(1001)]
+    [DataRow(9009)]
+    [DataRow(11111)]
+    [DataRow(999999)]
+    public void HasOneSignificantFigure_WhenInValidPositiveIntegerSupplied_ThenReturnsFalse(int i)
+    {
+        bool expectedResult = false;
+
+        var actual = i.HasOneSignificantFigure();
+
+        Assert.AreEqual(expectedResult, actual);
+    }
 }
