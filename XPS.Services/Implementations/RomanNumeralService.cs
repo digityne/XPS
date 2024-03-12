@@ -36,19 +36,29 @@ public class RomanNumeralService : IRomanNumeralService
         int intLength = roundedUnitString.Length;
         int intUnit = int.Parse(roundedUnitString[..1]);
 
-        // TODO: Improvement - this should be a separate method with unit test
-        string template = intUnit < 4 ? new string('I', intUnit) :
-            intUnit == 4 ? "IV" :
-            intUnit == 5 ? "V" :
-            intUnit < 9 ? "V" + new string('I', intUnit - 5) :
-            "IX";
+        var template = GetIVXTemplateForSingleDigit(intUnit);
 
-        // TODO: Improvement - this is primed to be a cyclical set of replacements based on int length
-        // This would also ensure more dynamic / scalable by adding higher roman numberals in a less manual way
+        // TODO: Improvement - this is primed to be a cyclical / function set of replacements based on int length
+        // that could also ensure more dynamic / scalability by adding higher roman numerals
+        // in a less manual way, through a class e.g. new class { int length, char[3] replacements }
         return intLength == 1 ? template :
             intLength == 2 ? template.Replace('X', 'C').Replace('V', 'L').Replace('I', 'X') :
             intLength == 3 ? template.Replace('X', 'M').Replace('V', 'D').Replace('I', 'C') :
             template.Replace("X", "").Replace("V", "").Replace('I', 'M');
+    }
+
+    public string GetIVXTemplateForSingleDigit(int intUnit)
+    {
+        if (intUnit < 1 || intUnit > 9)
+        {
+            throw new ArgumentOutOfRangeException($"{nameof(GetIVXTemplateForSingleDigit)} requires a number from 1 to 9 - actual {intUnit}");
+        }
+
+        return intUnit < 4 ? new string('I', intUnit) :
+            intUnit == 4 ? "IV" :
+            intUnit == 5 ? "V" :
+            intUnit < 9 ? "V" + new string('I', intUnit - 5) :
+            "IX";
     }
 
     public bool EnsureInputStringIsValid(string? inputStr)

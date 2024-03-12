@@ -125,4 +125,37 @@ public class RomanNumeralServiceTests
 
         Assert.ThrowsException<ArgumentException>(action);
     }
+
+
+    [DataTestMethod]
+    [DataRow(1, "I")]
+    [DataRow(2, "II")]
+    [DataRow(3, "III")]
+    [DataRow(4, "IV")]
+    [DataRow(5, "V")]
+    [DataRow(6, "VI")]
+    [DataRow(7, "VII")]
+    [DataRow(8, "VIII")]
+    [DataRow(9, "IX")]
+    public void GetIVXTemplateForSingleDigit_WhenValidInt_ThenTemplateCreated(int input, string expectedOutput)
+    {
+        var romanNumeralService = new RomanNumeralService();
+
+        var result = romanNumeralService.GetIVXTemplateForSingleDigit(input);
+
+        Assert.AreEqual(expectedOutput, result);
+    }
+
+    [DataTestMethod]
+    [DataRow(-1)]
+    [DataRow(0)]
+    [DataRow(10)]
+    public void GetIVXTemplateForSingleDigit_WhenInvalidInt_ThenThrowsArgumentRangeError(int input)
+    {
+        var romanNumeralService = new RomanNumeralService();
+
+        Action action = () => romanNumeralService.GetIVXTemplateForSingleDigit(input);
+
+        Assert.ThrowsException<ArgumentOutOfRangeException>(() => action());
+    }
 }
