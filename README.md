@@ -1,24 +1,22 @@
-# XPS
+# XPS - Roman Numeral Conversion Solution
 
-Set up a Class Library (XPS services), and a unit test project to start.
+- I set up a services and common library to exemplify some n-tier architecture and facilitate TDD
+(which I tried to use for the most part).
 
-Have looked online for Roman Numeral "Rules" - have basic knowledge but need strong definition.
+- I ensured all aspects were working through tests before finally implementing a Console App to act as the UI.
+
+- I looked online for Roman Numeral "Rules" - I have basic knowledge but needed a strong definition.
 https://byjus.com/maths/roman-numerals
 
-Best approach seems to be in the examples at the bottom - break any number into its decimal units
-(i.e. 1s, 10s, 100s, 1000s) and then convert each of these to a value
+- The best explanation for the rules was in the examples at the bottom;
+- - break any number into its decimal units
+- - (i.e. 1s, 10s, 100s, 1000s), convert each of these to a roman numeral and string them together
 
-Set up interface in service layer and think about which functions need exposed to an API and which can be internal
+- Also thought about the parameters of the initial task and good error handing:
+- - A number must be between 1 and 2000 (assumed inclusive) and not be a decimals or a negative.
 
-Also define roman numerals in a const class (I = 1, V = 5 etc.)
-
-Also thinking about confines of initial task and good error handing:
-Number must be between 1 and 2000 (assume inclusive), no decimals, no negatives.
-
-Trying a TDD approach - write a test, code for it, refactor
-Starting with breaking a number into decimal units...
-- Moved this to a common project and spent too long having fun with it!
-
-Now have two contracts in the Roman Numeral interface, TDD approach again:
-    string ConvertRoundedUnitToRoman(int decimalUnit);
-    string ConvertIntegerToRoman(int integer);
+- Room for improvements
+- - Some of the test data rows are a bit much
+	- Could load large data sets from a file to test against
+- - Scalability
+	- I'd liked to have put the template .Replace() functions in a loop, 
